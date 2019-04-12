@@ -12,7 +12,6 @@ services:
       - ./conf/grafana/grafana.ini:/etc/grafana/grafana.ini
       - ./conf/grafana/dasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
       - ./conf/grafana/dashboards:/etc/grafana/provisioning/dashboards
-      - ./conf/grafana/default.json:/etc/grafana/provisioning/dashboards/default.json
       - data:/var/lib/grafana/data
       - data:/var/lib/grafana/plugins
     depends_on:
