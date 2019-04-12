@@ -1,0 +1,63 @@
+version: "2.1"
+
+services:
+  grafana:
+    image: grafana/grafana:6.0.2
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    ports:
+      - '127.0.0.1:3000:3000'
+    volumes:
+      - ./conf/grafana/grafana.ini:/etc/grafana/grafana.ini
+      - ./conf/grafana/dasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
+      - ./conf/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./conf/grafana/default.json:/etc/grafana/provisioning/dashboards/default.json
+      - data:/var/lib/grafana/data
+      - data:/var/lib/grafana/plugins
+    depends_on:
+      - prometheus-server
+    networks:
+      - net
+    restart: always
+
+  prometheus-server:
+    image: prom/prometheus:v2.7.1
+    ports:
+      - '127.0.0.1:9090:9090'
+    volumes:
+      - data:/prometheus
+      - ./conf/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./conf/prometheus/rules:/etc/prometheus/rules
+      - ./conf/prometheus/alerts:/etc/prometheus/alerts
+    depends_on:
+      - prometheus-pushgateway
+      - prometheus-alertmanager
+    networks:
+      - net
+    restart: always
+
+  prometheus-pushgateway:
+    image: prom/pushgateway:v0.6.0
+    ports:
+      - '127.0.0.1:9091:9091'
+    networks:
+      - net
+    restart: always
+
+  prometheus-alertmanager:
+    image: prom/alertmanager:v0.15.3
+    ports:
+    - '127.0.0.1:9093:9093'
+    volumes:
+      - ./conf/prometheus/alertmanager.yml:/etc/config/alertmanager.yml
+      - data:/alertmanager
+    networks:
+      - net
+    restart: always
+
+volumes:
+  data:
+
+networks:
+  net:
