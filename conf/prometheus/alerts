@@ -2,7 +2,7 @@ groups:
   - name: Servers.AlertRulesGroup
     rules:
       - alert: web_active_users_alert
-        expr: sum_over_time(web_active_users[2m]) > 10
+        expr: sum_over_time(web_active_users[2m]) > 5
         for: 10s
         labels:
           severity: "warning"
