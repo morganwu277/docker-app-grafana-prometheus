@@ -44,6 +44,17 @@ services:
       - net
     restart: always
 
+  prometheus-client-example:
+    image: hortonworks/alpine-curl:3.1
+    command: "sh /example.sh"
+    volumes:
+      - ./conf/example.sh:/example.sh
+    depends_on:
+      - prometheus-pushgateway
+    networks:
+      - net
+    restart: always
+
   prometheus-alertmanager:
     image: prom/alertmanager:v0.15.3
     ports:
