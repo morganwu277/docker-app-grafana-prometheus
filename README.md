@@ -66,7 +66,9 @@
     
     For alerting rules, please checkout https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/
 
-    You can checkout alerts firing using this link: http://127.0.0.1:9090/alerts 
+    You can checkout alerts firing using this link: http://127.0.0.1:9090/alerts , here is an example
+    
+    ![alert](./doc/img/alerts.png)
 
 4. Reload Prometheus config after creating alert rules: 
 ```bash
