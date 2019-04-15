@@ -48,9 +48,11 @@
     
     Here I send the random values every 5 seconds
     ```bash
-    while true; do 
-      push_prometheus "web_active_users" "$(($RANDOM%10))" "web.morganwu277.github.io"
-      sleep 5
+    while true; do
+      push_prometheus "web_active_users" "$(($RANDOM%10))" "web_frontend_server1"
+      push_prometheus "web_active_users" "$(($RANDOM%10))" "web_frontend_server2"
+      push_prometheus "web_active_users" "$(($RANDOM%10))" "web_frontend_server3"
+      sleep 15
     done
     
     ```
