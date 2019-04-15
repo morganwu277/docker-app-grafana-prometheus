@@ -1,1 +1,13 @@
-groups: {}
+groups:
+  - name: Servers.AlertRulesGroup
+    rules:
+      - alert: web_active_users_alert
+        expr: sum_over_time(web_active_users[2m]) > 10
+        for: 10s
+        labels:
+          severity: "warning"
+        annotations:
+          description: '2m total web active users has been > 10 users. instance {{ $labels.instance }}'
+          summary: 'Web Active Users Alert, value: {{ $value }}, instance: {{ $labels.instance }}'
+
+
