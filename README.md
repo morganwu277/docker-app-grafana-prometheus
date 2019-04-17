@@ -23,7 +23,8 @@
 # How to play?
 
 1. Send metrics using pushgateway
-    You will see an `docker-app-grafana-prometheus_prometheus-client-example_1` container running there doing next task:
+
+    After `docker-compose up -d`, you should be able to see an `docker-app-grafana-prometheus_prometheus-client-example_1` container running there doing next tasks:
 
     Here is the script we can use to send metrics: 
     ```bash
